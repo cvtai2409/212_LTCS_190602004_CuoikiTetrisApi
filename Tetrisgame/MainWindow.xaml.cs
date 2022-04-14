@@ -226,7 +226,8 @@ namespace Tetrisgame
                 var res = "";
                 foreach(ScoreModel score in scoreModels)
                 {
-                    res += score.NickName + ": \t" + score.Score + "pts" + Environment.NewLine;
+                    string day = score.dateTime.Day.ToString()+"/"+score.dateTime.Month.ToString()+"/"+score.dateTime.Year.ToString();
+                    res += "\t" + score.NickName + ": \t" + score.Score + "pts \t" + day +  Environment.NewLine;
                 }
                 txtHighScore.Text = res;
             }catch(Exception e)
@@ -246,7 +247,7 @@ namespace Tetrisgame
             int score = gameState.Score;
             if(score > 0)
             {
-                client.BaseAddress = new Uri("https://localhost:7009/api/");
+                client.BaseAddress = new Uri("https://localhost:2409/api/");
 
                 var payload = "{\"Nickname\": \"" + score1.NickName + "\",\"score\": "+score+ ",\"dateTime\": \"" + localDate.ToString("yyyy-MM-ddTHH:mm:ss") + "\"}";
                 client.DefaultRequestHeaders.Accept.Clear();
